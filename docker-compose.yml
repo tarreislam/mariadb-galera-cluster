@@ -1,5 +1,6 @@
 services:
   mariadb:
+    restart: always
     build:
       context: .
       args:
