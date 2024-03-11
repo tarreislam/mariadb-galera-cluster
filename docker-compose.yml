@@ -8,6 +8,7 @@ services:
         - WSREP_SST_DONOR=${WSREP_SST_DONOR}
         - WSREP_CLUSTER_ADDRESS=${WSREP_CLUSTER_ADDRESS}
         - WSREP_NODE_NAME=${WSREP_NODE_NAME}
+        - WSREP_NODE_ADDRESS=${WSREP_NODE_ADDRESS}
     network_mode: "host"
     ports:
       - '3306:3306'

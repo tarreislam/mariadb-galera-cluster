@@ -13,6 +13,7 @@ ARG WSREP_CLUSTER_NAME
 ARG WSREP_SST_DONOR
 ARG WSREP_CLUSTER_ADDRESS
 ARG WSREP_NODE_NAME
+ARG WSREP_NODE_ADDRESS
 
 RUN apt-get update
 RUN apt-get install -y  software-properties-common tzdata wget curl
@@ -39,5 +40,6 @@ RUN sed -i "s|%WSREP_CLUSTER_NAME%|${WSREP_CLUSTER_NAME}|g" /etc/mysql/conf.d/ga
 RUN sed -i "s|%WSREP_SST_DONOR%|${WSREP_SST_DONOR}|g" /etc/mysql/conf.d/galera.cnf
 RUN sed -i "s|%WSREP_CLUSTER_ADDRESS%|${WSREP_CLUSTER_ADDRESS}|g" /etc/mysql/conf.d/galera.cnf
 RUN sed -i "s|%WSREP_NODE_NAME%|${WSREP_NODE_NAME}|g" /etc/mysql/conf.d/galera.cnf
+RUN sed -i "s|%WSREP_NODE_ADDRESS%|${WSREP_NODE_ADDRESS}|g" /etc/mysql/conf.d/galera.cnf
 
 ENTRYPOINT ["sh", "/app/entry.sh"]
