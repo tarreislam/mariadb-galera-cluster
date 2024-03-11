@@ -5,8 +5,9 @@ sed -i "s|%WSREP_SST_DONOR%|$WSREP_SST_DONOR|g" /etc/mysql/conf.d/galera.cnf
 sed -i "s|%WSREP_CLUSTER_ADDRESS%|$WSREP_CLUSTER_ADDRESS|g" /etc/mysql/conf.d/galera.cnf
 sed -i "s|%WSREP_NODE_NAME%|$WSREP_NODE_NAME|g" /etc/mysql/conf.d/galera.cnf
 sed -i "s|%WSREP_NODE_ADDRESS%|$WSREP_NODE_ADDRESS|g" /etc/mysql/conf.d/galera.cnf
+sed -i "s|%WSREP_SST_METHOD%|$WSREP_SST_METHOD|g" /etc/mysql/conf.d/galera.cnf
+sed -i "s|%WSREP_SST_AUTH_USER_PASS%|$WSREP_SST_AUTH_USER_PASS|g" /etc/mysql/conf.d/galera.cnf
 # Show some debug info
-
 echo "~ MYSQL VERSION ~"
 mysql --version
 echo "~ LOADED CONF ~"

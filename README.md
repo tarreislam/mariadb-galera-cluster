@@ -66,6 +66,9 @@ WSREP_SST_METHOD=mariabackup
 WSREP_SST_AUTH_USER_PASS=sst_user:sst_pass
 ```
 
+### Rsync
+If you want to waste your life debugging why rsync is not working you can set `WSREP_SST_METHOD=rsync` and `WSREP_SST_AUTH_USER_PASS=` to use Rsync.
+
 ### Crashed clusters
 
 If your cluster fails to start its probably because no node is safe to boot. Set `SAFE_TO_BOOTSTRAP=true` and `WSREP_NEW_CLUSTER=true` on the node you want to start
@@ -73,4 +76,4 @@ If your cluster fails to start its probably because no node is safe to boot. Set
 
 ### Mega epic crashed clusters
 
-If you somehow still have a crashed cluster add `START_WITHOUT_MYSQL=true` to successfully inspect/recover from your pod
+If you somehow still have a crashed cluster add `START_WITHOUT_MYSQL=true` to successfully inspect/recover from your pod.
