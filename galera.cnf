@@ -16,5 +16,6 @@ wsrep_node_incoming_address="%WSREP_NODE_ADDRESS%"
 # Cluster Ip addresses
 wsrep_cluster_address="gcomm://%WSREP_CLUSTER_ADDRESS%"
 # Galera Synchronization Configuration
-wsrep_sst_method=rsync
+wsrep_sst_method=%WSREP_SST_METHOD%
+wsrep_sst_auth=%WSREP_SST_AUTH_USER_PASS%
 wsrep_sst_donor="%WSREP_SST_DONOR%"

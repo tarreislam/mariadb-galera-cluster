@@ -6,11 +6,13 @@ Easiest way to setup a MariaDB galera cluster
 2. `cp .env.example .env`
 3. On first node set `WSREP_NEW_CLUSTER` to `true`
 4. On all nodes set same `WSREP_CLUSTER_NAME`
-5. On all nodes besides the first set `WSREP_SST_DONOR` to the node name of the previous node
-6. On all nodes set the `WSREP_NODE_NAME` to a unique name
-7. `docker-compose up -d mariadb`
-8. Remove `WSREP_NEW_CLUSTER` on first node
-
+5. On all nodes set `WSREP_SST_DONOR` to the node name of the previous node
+6. On all nodes set `WSREP_NODE_NAME` to a unique name
+7. `docker-compose up -d mariadb` on first node
+8. set `WSREP_NEW_CLUSTER=false` on first node
+9. create credentials for mariadb-backup `CREATE USER 'sst_user'@'%' IDENTIFIED BY 'sst_pass'; GRANT ALL PRIVILEGES ON *.* TO 'sst_user'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;`
+10. Change `SST_AUTH_USER_PASS=sst_user:sst_pass` on all nodes 
+11. Start the child nodes like step 7
 
 ### Example for 3 hosts
 
@@ -19,10 +21,15 @@ Easiest way to setup a MariaDB galera cluster
 WSREP_NEW_CLUSTER=true
 
 WSREP_CLUSTER_NAME=MyCluster
+
 WSREP_NODE_NAME=node-01
 WSREP_NODE_ADDRESS=10.0.1.15
-WSREP_SST_DONOR=
+
 WSREP_CLUSTER_ADDRESS=10.0.1.15,10.0.1.16,10.0.1.17
+
+WSREP_SST_DONOR=node-02,node-03
+WSREP_SST_METHOD=mariabackup
+WSREP_SST_AUTH_USER_PASS=sst_user:sst_pass
 ```
 
 #### Second node
@@ -31,10 +38,15 @@ WSREP_CLUSTER_ADDRESS=10.0.1.15,10.0.1.16,10.0.1.17
 WSREP_NEW_CLUSTER=false
 
 WSREP_CLUSTER_NAME=MyCluster
+
 WSREP_NODE_NAME=node-02
 WSREP_NODE_ADDRESS=10.0.1.16
-WSREP_SST_DONOR=node-01
+
 WSREP_CLUSTER_ADDRESS=10.0.1.15,10.0.1.16,10.0.1.17
+
+WSREP_SST_DONOR=node-01,node-03
+WSREP_SST_METHOD=mariabackup
+WSREP_SST_AUTH_USER_PASS=sst_user:sst_pass
 ```
 
 #### Third node
@@ -43,10 +55,15 @@ WSREP_CLUSTER_ADDRESS=10.0.1.15,10.0.1.16,10.0.1.17
 WSREP_NEW_CLUSTER=false
 
 WSREP_CLUSTER_NAME=MyCluster
+
 WSREP_NODE_NAME=node-03
 WSREP_NODE_ADDRESS=10.0.1.17
-WSREP_SST_DONOR=node-02
+
 WSREP_CLUSTER_ADDRESS=10.0.1.15,10.0.1.16,10.0.1.17
+
+WSREP_SST_DONOR=node-01,node-02
+WSREP_SST_METHOD=mariabackup
+WSREP_SST_AUTH_USER_PASS=sst_user:sst_pass
 ```
 
 ### Crashed clusters
