@@ -1,0 +1,22 @@
+services:
+  mariadb:
+    build:
+      context: .
+      args:
+        - WSREP_CLUSTER_NAME=${WSREP_CLUSTER_NAME}
+        - WSREP_SST_DONOR=${WSREP_SST_DONOR}
+        - WSREP_CLUSTER_ADDRESS=${WSREP_CLUSTER_ADDRESS}
+        - WSREP_NODE_NAME=${WSREP_NODE_NAME}
+    network_mode: "host"
+    ports:
+      - '3306:3306'
+      - '4444:4444'
+      - '4567:4567'
+      - '4568:4568'
+    volumes:
+      - 'mariadb_data:/var/lib/mysql'
+    env_file:
+      - .env
+volumes:
+  mariadb_data:
+    driver: local
