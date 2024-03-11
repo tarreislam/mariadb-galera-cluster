@@ -6,8 +6,8 @@ WORKDIR /app
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ="Europe/Stockholm"
 
-ARG MARIADB_VERSION="mariadb-10.6"
-ARG MARIADB_VERSION_CHECKSUM="30d2a05509d1c129dd7dd8430507e6a7729a4854ea10c9dcf6be88964f3fdc25"
+# Currently the latest LTS @2024-03-11: https://mariadb.com/kb/en/mariadb-package-repository-setup-and-usage/
+ARG MARIADB_VERSION="mariadb-10.11"
 
 RUN apt-get update
 RUN apt-get install -y  software-properties-common tzdata wget curl
@@ -15,9 +15,7 @@ RUN ln -fs /usr/share/zoneinfo/Europe/Stockholm /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
 
 RUN wget https://r.mariadb.com/downloads/mariadb_repo_setup
-# This checksum is bound to mariadb-10.6. Remember to change if you switch version
-RUN echo "$MARIADB_VERSION_CHECKSUM mariadb_repo_setup" \
-    | sha256sum -c -
+
 RUN chmod +x mariadb_repo_setup
 RUN ./mariadb_repo_setup \
        --mariadb-server-version="$MARIADB_VERSION" \
