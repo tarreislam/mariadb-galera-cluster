@@ -78,5 +78,12 @@ If your cluster fails to start its probably because no node is safe to boot. Set
 
 If you somehow still have a crashed cluster add `START_WITHOUT_MYSQL=true` to successfully inspect/recover from your pod.
 
-### Remove mysql dir on boot
-set `WIPE_MYSQL_DIR=yes_im_stupid`
+### Upgrading mariadb version
+
+Mariadb updates are not cumulative, which means you have to upgrade 1 version at a time for the best result.
+
+Easiest way, does have downtime:
+
+1. Kill kluster
+2. Start new cluster with new version + `WSREP_NEW_CLUSTER=true` and `SAFE_TO_BOOTSTRAP=true`
+3. yolo
