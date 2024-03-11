@@ -3,12 +3,6 @@ services:
     restart: always
     build:
       context: .
-      args:
-        - WSREP_CLUSTER_NAME=${WSREP_CLUSTER_NAME}
-        - WSREP_SST_DONOR=${WSREP_SST_DONOR}
-        - WSREP_CLUSTER_ADDRESS=${WSREP_CLUSTER_ADDRESS}
-        - WSREP_NODE_NAME=${WSREP_NODE_NAME}
-        - WSREP_NODE_ADDRESS=${WSREP_NODE_ADDRESS}
     network_mode: "host"
     volumes:
       - 'mariadb_data:/var/lib/mysql'
