@@ -26,11 +26,6 @@ if [ "$START_WITHOUT_MYSQL" = "true" ]; then
     echo "START_WITHOUT_MYSQL = true"
     sleep infinity
 fi
-# Wipe entire data dir?
-if [ "$WIPE_MYSQL_DIR" = "yes_im_stupid" ]; then
-    echo "WIPE_MYSQL_DIR=yes_im_stupid"
-    rm -rf /var/lib/mysql/*
-fi
 # Actual start
 echo "~ ATTEMTING TO START MYSQLD ~"
 if [ "$WSREP_NEW_CLUSTER" = "true" ]; then
