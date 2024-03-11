@@ -14,11 +14,9 @@ echo "~ LOADED CONF ~"
 cat /etc/mysql/conf.d/galera.cnf
 echo "~ current /var/lib/mysql/grastate.dat ~"
 cat /var/lib/mysql/grastate.dat
-
-# Safe to bootstrap (in case of crash)
+# force safe to bootstrap
 if [ "$SAFE_TO_BOOTSTRAP" = "true" ]; then
     echo "SAFE_TO_BOOTSTRAP = true"
-    #galera_new_cluster
     sed -i 's/safe_to_bootstrap: 0/safe_to_bootstrap: 1/' /var/lib/mysql/grastate.dat
 fi
 # Incase Mysqld crashes 24\7 we can just sleep so we can do manual debugging
@@ -30,7 +28,6 @@ fi
 echo "~ ATTEMTING TO START MYSQLD ~"
 if [ "$WSREP_NEW_CLUSTER" = "true" ]; then
     echo "WSREP_NEW_CLUSTER = true"
-    #galera_new_cluster
     mysqld --wsrep-new-cluster
 else
     echo "WSREP_NEW_CLUSTER = false"
