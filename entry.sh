@@ -21,11 +21,15 @@ if [ "$SAFE_TO_BOOTSTRAP" = "true" ]; then
     #galera_new_cluster
     sed -i 's/safe_to_bootstrap: 0/safe_to_bootstrap: 1/' /var/lib/mysql/grastate.dat
 fi
-
 # Incase Mysqld crashes 24\7 we can just sleep so we can do manual debugging
 if [ "$START_WITHOUT_MYSQL" = "true" ]; then
     echo "START_WITHOUT_MYSQL = true"
     sleep infinity
+fi
+# Wipe entire data dir?
+if [ "$WIPE_MYSQL_DIR" = "yes_im_stupid" ]; then
+    echo "WIPE_MYSQL_DIR=yes_im_stupid"
+    rm -rf /var/lib/mysql/*
 fi
 # Actual start
 echo "~ ATTEMTING TO START MYSQLD ~"

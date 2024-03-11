@@ -77,3 +77,6 @@ If your cluster fails to start its probably because no node is safe to boot. Set
 ### Mega epic crashed clusters
 
 If you somehow still have a crashed cluster add `START_WITHOUT_MYSQL=true` to successfully inspect/recover from your pod.
+
+### Remove mysql dir on boot
+set `WIPE_MYSQL_DIR=yes_im_stupid`
