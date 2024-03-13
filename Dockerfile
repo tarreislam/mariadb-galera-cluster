@@ -25,7 +25,7 @@ RUN mkdir /run/mysqld && chown -R mysql:mysql /run/mysqld
 
 COPY galera.cnf /etc/mysql/conf.d/galera.cnf
 # Bind address adressed twice because version diff handles it differently
-COPY 00-mariadb-server.cnf /etc/mysql/mariadb.conf.d/00-mariadb-server.cnf
+COPY 00-mariadb-server.cnf /etc/mysql/mariadb.conf.d/m-00-mariadb-server.cnf
 
 COPY entry.sh /app/entry.sh
 RUN chmod +x /app/entry.sh
