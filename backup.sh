@@ -8,4 +8,4 @@ for db in $databases; do
 done
 
 # Remove 7 days old files
-find /backups/ -type f -mtime +7 -name '*.gz' -execdir rm -- '{}' \;
+find /backups -type f -mtime +7 -exec rm {} \;
