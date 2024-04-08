@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir -p /backups
 
 databases=$(docker-compose exec mariadb mysql -e "show databases;" | grep -Ev "(Database|information_schema|performance_schema|mysql)")
 
@@ -8,4 +9,4 @@ for db in $databases; do
 done
 
 # Remove 7 days old files
-find /backups -type f -mtime +7 -exec rm {} \;
+find /backups -type f -mtime +3 -exec rm {} \;
