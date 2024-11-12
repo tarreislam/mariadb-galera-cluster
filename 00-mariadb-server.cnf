@@ -4,3 +4,4 @@ user=root
 innodb_buffer_pool_size=13G
 innodb_flush_method=O_DIRECT
 innodb_log_file_size=1G
+max_connections=300
