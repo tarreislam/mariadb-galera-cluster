@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TZ="Europe/Stockholm"
 
 # Currently the latest LTS @2024-03-11: https://mariadb.com/kb/en/mariadb-package-repository-setup-and-usage/
-ARG MARIADB_VERSION="mariadb-11.8"
+ARG MARIADB_VERSION="mariadb-10.11"
 
 RUN apt-get update
 RUN apt-get install -y  software-properties-common tzdata wget curl
