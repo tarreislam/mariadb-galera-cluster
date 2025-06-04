@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TZ="Europe/Stockholm"
 
 # Currently the latest LTS @2024-03-11: https://mariadb.com/kb/en/mariadb-package-repository-setup-and-usage/
-ARG MARIADB_VERSION="mariadb-11.7"
+ARG MARIADB_VERSION="mariadb-11.8"
 
 RUN apt-get update
 RUN apt-get install -y  software-properties-common tzdata wget curl
@@ -25,7 +25,9 @@ RUN mkdir /run/mysqld && chown -R mysql:mysql /run/mysqld
 
 COPY galera.cnf /etc/mysql/conf.d/galera.cnf
 # Bind address adressed twice because version diff handles it differently
-COPY 00-mariadb-server.cnf /etc/mysql/mariadb.conf.d/m-00-mariadb-server.cnf
+COPY 1337-my.cnf /etc/mysql/mariadb.conf.d/1337-my.cnf
+RUN sed -i 's/^\s*bind-address\s*=.*/# &/' /etc/mysql/mariadb.conf.d/50-server.cnf
+
 
 COPY entry.sh /app/entry.sh
 RUN chmod +x /app/entry.sh
