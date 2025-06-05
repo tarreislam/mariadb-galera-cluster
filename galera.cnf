@@ -1,4 +1,9 @@
 [mysqld]
+binlog_format=ROW
+default-storage-engine=innodb
+innodb_autoinc_lock_mode=2
+bind-address=0.0.0.0
+user=root
 # Galera Provider Configuration
 wsrep_on=ON
 wsrep_provider=/usr/lib/galera/libgalera_smm.so

@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM ubuntu:22.04
 MAINTAINER Tarre <tarre@uniguide.se>
 
 WORKDIR /app
@@ -27,7 +27,8 @@ COPY galera.cnf /etc/mysql/conf.d/galera.cnf
 # Bind address adressed twice because version diff handles it differently
 COPY 1337-my.cnf /etc/mysql/mariadb.conf.d/1337-my.cnf
 RUN sed -i 's/^\s*bind-address\s*=.*/# &/' /etc/mysql/mariadb.conf.d/50-server.cnf
-
+RUN echo 'bind-address = 0.0.0.0' >> /etc/mysql/mariadb.conf.d/50-server.cnf
+#RUN sed -i 's/^\s*bind-address\s*=.*/# &/' /etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY entry.sh /app/entry.sh
 RUN chmod +x /app/entry.sh
