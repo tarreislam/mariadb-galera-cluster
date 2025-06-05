@@ -7,7 +7,7 @@ mkdir -p /backups
 databases=$(docker-compose exec mariadb mysql -e "show databases;" | grep -Ev "(Database|information_schema|performance_schema|mysql)")
 
 for db in $databases; do
-  docker-compose exec mariadb mysqldump "$db" | gzip > /backups/"$db"_$(date +%Y%m%d%H%M%S).sql.gz
+  docker-compose exec mariadb mysqldump --single-transaction --quick --lock-tables=false "$db" | gzip > /backups/"$db"_$(date +%Y%m%d%H%M%S).sql.gz
 done
 
 # Remove x days old files
