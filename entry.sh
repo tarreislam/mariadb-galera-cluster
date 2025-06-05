@@ -53,8 +53,8 @@ fi
 echo "~ ATTEMTING TO START MYSQLD ~"
 if [ "$WSREP_NEW_CLUSTER" = "true" ]; then
     echo "WSREP_NEW_CLUSTER = true"
-    /usr/sbin/mariadbd --wsrep-new-cluster
+    mysqld --wsrep-new-cluster
 else
     echo "WSREP_NEW_CLUSTER = false"
-    /usr/sbin/mariadbd
+    mysqld
 fi
